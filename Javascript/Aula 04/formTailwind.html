@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </head>
+  <body class="bg-slate-100 px-4 py-10 text-slate-900">
+    <div class="mx-auto max-w-3xl rounded-2xl bg-white p-8 shadow-lg">
+      <div class="mb-8 text-center">
+        <img
+          class="mx-auto mb-4 h-auto max-w-full"
+          src="https://ml919w4mrvj0.i.optimole.com/w:443/h:95/q:mauto/f:best/https://www.upacademy.pt/media/UP-Academy-Logo-Retina-Website.png"
+          alt="Img UpAcademy"
+        >
+        <h1 class="text-3xl font-bold">Primeiro form</h1>
+      </div>
+
+      <form class="space-y-5 rounded-xl bg-cyan-100 p-6">
+        <div class="grid gap-2 sm:grid-cols-12 sm:items-center">
+          <label for="inputEmail" class="sm:col-span-3 font-medium">Email</label>
+          <div class="sm:col-span-9">
+            <input type="email" class="w-full rounded-lg border border-slate-300 bg-white px-4 py-2 outline-none transition focus:border-cyan-500 focus:ring-2 focus:ring-cyan-200" id="inputEmail">
+          </div>
+        </div>
+        <div class="grid gap-2 sm:grid-cols-12 sm:items-center">
+          <label for="inputAddress" class="sm:col-span-3 font-medium">Address</label>
+          <div class="sm:col-span-9">
+            <input type="text" class="w-full rounded-lg border border-slate-300 bg-white px-4 py-2 outline-none transition focus:border-cyan-500 focus:ring-2 focus:ring-cyan-200" id="inputAddress">
+          </div>
+        </div>
+        <div class="grid gap-2 sm:grid-cols-12 sm:items-center">
+          <label for="inputName" class="sm:col-span-3 font-medium">Name</label>
+          <div class="sm:col-span-9">
+            <input type="text" class="w-full rounded-lg border border-slate-300 bg-white px-4 py-2 outline-none transition focus:border-cyan-500 focus:ring-2 focus:ring-cyan-200" id="inputName">
+          </div>
+        </div>
+        <div class="grid gap-2 sm:grid-cols-12 sm:items-center">
+          <label for="inputNumber" class="sm:col-span-3 font-medium">Number</label>
+          <div class="sm:col-span-9">
+            <input type="number" class="w-full rounded-lg border border-slate-300 bg-white px-4 py-2 outline-none transition focus:border-cyan-500 focus:ring-2 focus:ring-cyan-200" id="inputNumber">
+          </div>
+        </div>
+        <div class="grid gap-2 sm:grid-cols-12 sm:items-center">
+          <label for="inputPassword" class="sm:col-span-3 font-medium">Password</label>
+          <div class="sm:col-span-9">
+            <input type="password" class="w-full rounded-lg border border-slate-300 bg-white px-4 py-2 outline-none transition focus:border-cyan-500 focus:ring-2 focus:ring-cyan-200" id="inputPassword">
+          </div>
+        </div>
+        <div class="grid gap-2 sm:grid-cols-12 sm:items-start">
+          <span class="sm:col-span-3 font-medium">Gender</span>
+          <div class="sm:col-span-9 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-6">
+            <label class="flex items-center gap-2" for="inputMale">
+              <input class="h-4 w-4 accent-cyan-600" type="radio" name="genderInput" id="inputMale" value="male">
+              <span>Male</span>
+            </label>
+            <label class="flex items-center gap-2" for="inputFemale">
+              <input class="h-4 w-4 accent-cyan-600" type="radio" name="genderInput" id="inputFemale" value="female">
+              <span>Female</span>
+            </label>
+            <label class="flex items-center gap-2" for="inputOther">
+              <input class="h-4 w-4 accent-cyan-600" type="radio" name="genderInput" id="inputOther" value="other">
+              <span>Other</span>
+            </label>
+          </div>
+        </div>
+        <div class="grid gap-2 sm:grid-cols-12 sm:items-center">
+          <label for="inputSelect" class="sm:col-span-3 font-medium">Club</label>
+          <div class="sm:col-span-9">
+            <select class="w-full rounded-lg border border-slate-300 bg-white px-4 py-2 outline-none transition focus:border-cyan-500 focus:ring-2 focus:ring-cyan-200" aria-label="Default select example" id="inputSelect">
+              <option value="benfica">Benfica</option>
+              <option value="porto">Porto</option>
+              <option value="sporting">Sporting</option>
+            </select>
+          </div>
+        </div>
+        <div class="grid gap-2 sm:grid-cols-12 sm:items-center">
+          <div class="sm:col-span-3"></div>
+          <div class="sm:col-span-9">
+            <label class="flex items-center gap-2" for="gridCheck1">
+              <input class="h-4 w-4 rounded border-slate-300 accent-cyan-600" type="checkbox" id="gridCheck1">
+              <span>Example checkbox</span>
+            </label>
+          </div>
+        </div>
+        <div class="text-center">
+          <button type="button" class="rounded-lg bg-red-600 px-6 py-2 font-semibold text-white transition hover:bg-red-700">Send</button>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>
