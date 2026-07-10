@@ -1,0 +1,81 @@
+<!-- 
+  Doc HTML
+  -Iniciar tag de HTML : < {tag name} >
+  -Terminar tag de HTML : </ {tag name} >
+  Nota: existem tags que não precisam de ser fechadas. Exemplo <img>
+  https://www.w3schools.com/tags/default.asp 
+
+    Os elementos de HTML podem ter atributos proprios. Exemplo o atributo src só pode pertencer
+  aos seguintes tags: <audio>, <embed>, <iframe>, <img>, <input>, <script>, <source>, <track>, <video>
+  https://www.w3schools.com/tags/ref_attributes.asp
+
+    Também existem atributos globais (podem ser dados a qualquer elemento HTML)
+  Exemplo o atributo class="" que serve para adicionar classes de CSS ao elemento HTML
+  https://www.w3schools.com/tags/ref_standardattributes.asp
+
+    CSS é usado para adicionar estilo ao HTML
+  Existem frameworks de CSS (conjuntos de componentes: classes para redefinição de estilo,
+  grid especialmente para o design responsivo, styling para tooltips, botões, elementos de formulários,
+  partes de interfaces gráficas ) por exemplo o Bootstrap
+  https://getbootstrap.com/
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+</head>
+
+<!--
+  Bootstrap:
+  container e container-fluid - https://getbootstrap.com/docs/5.3/layout/containers/
+  margin e padding - https://getbootstrap.com/docs/5.3/utilities/spacing/
+  grid - https://getbootstrap.com/docs/5.3/layout/grid/
+ -->
+
+<body>
+  <header>
+    <img src="" alt="">
+    <h3>...</h3>
+    <p></p>
+  </header>
+
+  <main>
+    <form>
+      <label for="input1"></label>
+      <input type="text" id="input1">
+      ...
+    </form>
+
+    <table>
+      <thead>
+        <tr>
+          <th>ID:</th>
+          ...
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          ...
+        </tr>
+        ...
+      </tbody>
+    </table>
+  </main>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+    crossorigin="anonymous"></script>
+
+</body>
+
+</html>
