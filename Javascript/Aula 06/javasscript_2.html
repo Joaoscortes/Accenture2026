@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+  <script>
+    const cars = [];
+    
+
+    class Car {
+      constructor(name, color, numberOfDoors = 2){
+        this.name = name;
+        this.color = color;
+        this.doors = numberOfDoors;
+        this.tyres = 4;
+      }
+
+      toString() {
+        return "Name: "+this.name+" , Color: "+this.color;
+      }
+
+    }
+
+    let bwm = new Car("Bmw", "Blue");
+    cars.push(bwm);
+
+
+  </script>
+</body>
+</html>
