@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Order Array</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+</head>
+
+<body>
+  <div class="container text-center">
+    <h3>Order Array</h3>
+  </div>
+
+  <div class="container">
+    <form class="bg-info p-3">
+      <div class="row mb-3">
+        <label for="inputData" class="col-sm-2 col-form-label">Nomes</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="inputData" onkeydown="funcDoAtum(event)">
+          <p id="validationInput" class="text-danger"></p>
+        </div>
+      </div>
+      <div class="d-flex justify-content-evenly">
+        <button type="button" class="btn btn-primary" onclick="addDataToArray()">Send</button>
+        <button id="btnOrderArray" type="button" class="btn btn-primary" onclick="orderArray()">Order</button>
+        <button id="btnOrderReverseArray" type="button" class="btn btn-primary disabled"
+          onclick="reverseOrder()">Reverse</button>
+      </div>
+    </form>
+
+    <p id="currentArrayData"></p>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+    crossorigin="anonymous"></script>
+  <script>
+    const array = [];
+
+    function addDataToArray() {
+      clearValidationMsg()
+      const currentInputValue = document.getElementById('inputData').value
+      if (!currentInputValue || currentInputValue == "") {
+        setValidationMsg("Validation msg");
+        return;
+      }
+      array.push(currentInputValue);
+      document.getElementById('inputData').value = '';
+      showArrayOnHtml();
+    }
+
+    function showArrayOnHtml() {
+      document.getElementById('currentArrayData').innerHTML = JSON.stringify(array);
+    }
+
+    function orderArray() {
+      array.sort();
+      showArrayOnHtml();
+    }
+
+    function reverseOrder() {
+      array.reverse();
+      showArrayOnHtml();
+    }
+
+    function setValidationMsg(msg) {
+      document.getElementById('validationInput').innerText = '*' + msg;
+    }
+
+    function clearValidationMsg() {
+      document.getElementById('validationInput').innerHTML = '';
+    }
+
+    function funcDoAtum(e) {
+      console.log(e);
+      if (e.keyCode == 13) {
+        e.preventDefault();
+        addDataToArray();
+      }
+    }
+
+  </script>
+</body>
+
+</html>
