@@ -18,6 +18,39 @@
       For numbers which are multiple of 3 and 5 both, the array should have “FizzBuzz”.
     */
 
+    class FizzBuzz {
+      constructor(maxNum) {
+        this.maxNum = maxNum;
+        this.count = 0;
+      }
+
+      setMaxNum(num) {
+        this.maxNum = num;
+      }
+
+      run() {
+        let index = 1;
+        while (index <= this.maxNum) {
+          let currentString = `Numero - ${index} : `;
+
+          if (index%3=== 0) {
+            currentString += 'Fizz';
+          }
+
+          if (index%5=== 0) {
+            currentString += 'Buzz';
+          }
+          console.log(currentString);
+
+          index++;
+        }
+        this.count++;
+      }
+    }
+
+    let f = new FizzBuzz(15);
+    f.run();
+
   </script>
 </body>
 
