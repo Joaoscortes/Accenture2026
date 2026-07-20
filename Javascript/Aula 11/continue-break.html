@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <script>
+
+    const array = [1, 2, 3, 4, 5];
+
+    for (let index = 0; index < array.length; index++) {
+      const element = array[index];
+      if (element < 0) {
+        console.log("Error: ", element);
+        break;
+      }
+
+      if (element === 3) {
+        console.log("No elemento 3")
+        continue;
+      }
+      console.log("Elemento: ", element);
+
+
+    }
+
+    console.log("After for");
+
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/label
+    loop1: for (let i = 0; i < 3; i++) {
+      loop2: for (let j = 0; j < 3; j++) {
+        if (i === 1 && j === 1) {
+          break loop1;
+        }
+        console.log(`i = ${i}, j = ${j}`);
+      }
+    }
+  </script>
+</body>
+
+</html>

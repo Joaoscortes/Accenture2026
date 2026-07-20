@@ -1,4 +1,4 @@
-<!doctype html>
+<!Doctype html>
 <html lang="en">
 
 <head>
@@ -17,9 +17,9 @@
     crossorigin="anonymous"></script>
   <script>
     /********************************************************************************
-     *
-     *       Desafio: Adicionar iva aos produtos e apresentar os totais por cliente.
-     *
+     \*
+      * Desafio: Adicionar iva aos produtos e apresentar os totais por cliente.
+     \*
      ********************************************************************************/
     const data = [
       {
@@ -39,7 +39,8 @@
             preco: 1
           }
         ]
-      }, {
+      },
+      {
         client: "Zé Manel",
         products: [{
           product: "Bolachas",
@@ -49,22 +50,19 @@
           product: "Coca-Cola",
           iva: 23,
           preco: 2
-        }]
-      }]
+        }
+        ]
+      }
+    ];
 
-      // loop for
-      data[0].products[0].preco
-      data[0].products[1].preco
-      data[0].products[2].preco
-      data[1].products[0].preco
-      data[1].products[1].preco
+    data.forEach(client => {
+      let total = 0;
+      client.products.forEach(item => {
+        total += item.preco * (1 + item.iva / 100);
+      });
+      document.write("Total do cliente " + client.client + ": " + total.toFixed(2) + "<br>");
+    });
 
-      // o mesmo para iva
-
-      // sum
-      let total = data[0].products[0].preco + data[0].products[1].preco + data[0].products[2].preco
-
-      // show result
   </script>
 </body>
 
