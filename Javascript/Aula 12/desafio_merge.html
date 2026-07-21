@@ -52,12 +52,17 @@
      ******************************************************************************/
 
     //  Add Logic
-    document.addEventListener("DOMContentLoaded", (event) => {
+    document.addEventListener("DOMContentLoaded", () => {
       resolveSet();
     });
 
     function resolveSet() {
       // add
+
+      const result = [...new Set([...data1, ...data2, ...data3].map((item) => item.name))];
+      result.sort();
+
+      document.getElementById("result").innerHTML = result.join();
     }
   </script>
 </body>
