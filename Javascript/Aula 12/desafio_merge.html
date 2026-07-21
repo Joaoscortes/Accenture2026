@@ -53,7 +53,8 @@
 
     //  Add Logic
     document.addEventListener("DOMContentLoaded", () => {
-      resolveSet();
+      // resolveSet();
+      resolveString();
     });
 
     function resolveSet() {
@@ -61,6 +62,20 @@
 
       const result = [...new Set([...data1, ...data2, ...data3].map((item) => item.name))];
       result.sort();
+
+      document.getElementById("result").innerHTML = result.join();
+    }
+
+    function resolveString() {
+      let result = "";
+
+      const allData = [...data1, ...data2, ...data3];
+
+      for (const element of allData) {
+        if (!result.match(element)) {
+          result += " "+ element;
+        }
+      }
 
       document.getElementById("result").innerHTML = result.join();
     }

@@ -12,7 +12,8 @@
 <body data-spy="scroll" style="position: relative;">
   <nav id="navbar" class="navbar navbar-expand-lg bg-light fixed-top" style="background-color: transparent">
     <a class="navbar-brand" href="#">Navbar</a>
-    <button class="navbar-toggler btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
+    <button class="navbar-toggler btn-primary" type="button" data-bs-toggle="collapse"
+      data-bs-target="#navbarResponsive"
       aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -70,14 +71,56 @@
     /**
      * Desafio 1.
      */
-    
+
     function resolve1() {
       // TODO - get input
+      let inputVal = document.getElementById("input1").value;
+      console.log(inputVal);
+      // validate multiple spaces / min 3 element
+      let inputValArray = inputVal.split(" ");
+      console.log(inputValArray);
+      inputValArray = inputValArray.map((el) => parseInt(el, 10)) //    4
+      console.log(inputValArray);
 
-
-
-
+      let result = mathSolution(inputValArray);
+      // whileSolution(inputValArray);
       // TODO - Write on html #result 1
+      document.getElementById("result1").innerHTML = result.toString();
+    }
+
+    function mathSolution(inputValArray) {
+      const result = [];
+      const lengthInit = inputValArray.length;
+      for (let index = 0; index < lengthInit; index++) {
+        let maxNumb = Math.max(...inputValArray); // 33
+        let maxNumbIndex = inputValArray.findIndex((num) => num === maxNumb); // 1
+        result.push(maxNumb);
+        inputValArray.splice(maxNumbIndex, 1)
+      }
+
+      return result;
+    }
+
+    function whileSolution(inputValArray) {
+      let isOrder = false;
+      while (!isOrder) { // isOrder === false
+        let needChange = false
+        for (let index = 0; index < inputValArray.length; index++) {
+          const element = inputValArray[index];
+          const nextElement = inputValArray[index + 1];
+
+          if (element < nextElement) {
+            needChange = true;
+            let temp = inputValArray[index];
+            inputValArray[index] = inputValArray[index + 1];
+            inputValArray[index + 1] = temp
+          }
+        }
+
+        if (needChange === false) {
+          isOrder = true;
+        }
+      }
     }
 
     /**
