@@ -127,7 +127,22 @@
      * Desafio 2.
      */
     function resolve2() {
+      const inputVal = document.getElementById("input2").value;
+      const nums = inputVal.split("");
+      console.log(nums);
 
+      let newNums = [];
+      for (let index = 0; index < nums.length - 1; index++) {
+        if (nums[index] % 2 === 0 && nums[index + 1] % 2 === 0) {
+          newNums.push(nums[index], "-");
+        } else if (nums[index] % 2 != 0 && nums[index + 1] % 2 != 0) {
+          newNums.push(nums[index], "#");
+        } else {
+          newNums.push(nums[index]);
+        }
+      }
+      newNums.push(nums[nums.length - 1]);
+      document.getElementById("result2").innerHTML = newNums.join('')
     }
   </script>
 </body>
