@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Title</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+</head>
+
+<body>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+    crossorigin="anonymous"></script>
+  <script>
+    const a = ["Joao Cortes", "Ana", " ze Carlos", "Andre"]
+
+    a.filter((item) => item.includes(" "))
+
+    // function myFilter(condition) {
+    //   let result = [];
+
+    //   for (const item of a) {
+    //     if (condition) {
+    //       result.push(item)
+    //     }
+    //   }
+
+    //   return result
+    // }
+
+    // my(item.includes(" "))
+
+    // function myFilter(arr) {
+    //   let result = [];
+
+    //   for (const item of arr) {
+    //     if (item.includes(" ")) {
+    //       result.push(item)
+    //     }
+    //   }
+
+    //   return result
+    // }
+
+    // myFilter(a)
+
+    function myFilter(arr, condition) {
+      let result = [];
+
+      for (const item of arr) {
+        if (item.includes(condition)) {
+          result.push(item)
+        }
+      }
+
+      // while (arr.length > 0) {
+      //   let item = arr.pop();
+      //   if (item.includes(condition)) {
+      //     result.push(item)
+      //   }
+      // }
+
+      return result
+    }
+
+    myFilter(a, " ")
+  </script>
+</body>
+
+</html>

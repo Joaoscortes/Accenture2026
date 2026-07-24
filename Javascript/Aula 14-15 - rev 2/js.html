@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>JS Rev 2</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <style>
+    #nameInpout {
+      color: green
+    }
+
+    .class-name {
+      color: blue
+    }
+
+    h1 {
+      color: yellow
+    }
+  </style>
+</head>
+
+<body>
+  <h1></h1>
+  <h6></h6>
+  <p></p>
+
+  <table class="">
+    <thead>
+      <tr>
+        <td>Name</td>
+        <td>Age</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Joao</td>
+        <td>42</td>
+      </tr>
+      <tr>
+        <td>Ze Carlos</td>
+        <td>9</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <form>
+    <label for="nameInput">Name:</label>
+    <input type="text" id="nameInput">
+
+    <button type="button">Click</button>
+  </form>
+
+  <ul>
+    <li>List item</li>
+  </ul>
+  <ol>
+    <li>List Item</li>
+  </ol>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+    crossorigin="anonymous"></script>
+  <script>
+    let number = 5;
+    let string = "List Item";
+    let string2 = '';
+    let string3 = `
+  <ol>
+    <li>${string}</li>
+  </ol>
+    `;
+    let bolean = true // false;
+    let var_null = null; // undefined
+
+    // Array
+    let array = [1, "2", 3];
+    let lastIndex = array.length - 1;
+    array[lastIndex];
+
+    array.forEach((item) => {
+      return item * 2;
+    })
+    array.map((item) => item * 2)
+
+    for (const item of array) {
+
+    }
+
+    array.splice(1, 1, parseInt(a[1], 10))
+
+
+    // JSON
+    let obj = {
+      name: "",
+      age: 12
+    }
+    obj["name"];
+    obj.name
+
+    for (const key in object) {
+      if (!Object.hasOwn(object, key)) continue;
+      const element = object[key];
+    }
+
+    for (let index = array.length - 1; index > -1; index--) {
+      let item = array[index];
+      item = parseInt(item, 10);
+      array[index] = item * 2;
+    }
+
+    //while
+    let index = array.length - 1
+    while (index > -1) {
+      let item = array[index];
+      item = parseInt(item, 10);
+      array[index] = item * 2;
+
+      index--
+    }
+
+    let even = (num % 2 === 0) ? true : false;
+    function isEven(num) {
+      // if (num % 2 === 0) {
+      //   return true;
+      // } else {
+      //   return false;
+      // }
+
+      return (num % 2 === 0) ? true : false;
+    }
+
+    const isEven_Arrow = (num) => {
+      return (num % 2 === 0) ? true : false;
+    }
+    // const isEven_Arrow = (num) => (num % 2 === 0) ? true : false;
+
+    // else
+    if (hour > 13) {
+
+    } else {
+
+    }
+
+    if (hour > 20) {
+      "Boa Noite"
+    } else if (hour > 13) {
+      "Boa Tarde"
+    } else {
+      "Bom Dia"
+    }
+
+    //
+    switch (hour) {
+      case 20:
+      case 21:
+      case 22:
+      case 23:
+        "Boa Noite"
+        break;
+      case 13:
+      case 14:
+      case 15:
+      //...
+      case 19:
+        "Boa Tarde"
+        break;
+
+      default:
+        "Bom Dia"
+        break;
+    }
+
+    // class
+    class User {
+      name = '';
+
+      constructor(name) {
+        if (!!name) {
+           this.name = name;
+        }
+
+      }
+
+      sayName(hour) {
+        console.log(this.name + ",");
+        if (hour > 20) {
+          console.log("Boa Noite");
+        } else if (hour > 13) {
+          console.log("Boa Tarde");
+        } else {
+          console.log("Bom Dia");
+        }
+      }
+    }
+
+    let n = "Joao"
+    const currentUser = new User(n);
+    currentUser.sayName(16);
+
+  </script>
+</body>
+
+</html>
