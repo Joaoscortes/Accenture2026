@@ -9,7 +9,7 @@
     integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 </head>
 
-<body>
+<body class="container text-center">
   <!--
   header // titulo
   paragrafo
@@ -20,6 +20,23 @@
 
   btn / resolve
   -->
+  <h1 class="mt-5">Title</h1>
+  <div class="my-4">
+    <p>Animal names:</p>
+    <input type="text" id="userInput">
+  </div>
+
+  <div class="row">
+    <button class="col-12 col-md-6 btn btn-primary" onclick="addToList('listA')">Add To A</button>
+    <button class="col-12 col-md-6 btn btn-info" onclick="addToList('listB')">Add To B</button>
+  </div>
+
+  <div class="row">
+    <ul class="col-12 col-md-6" id="listA"></ul>
+    <ul class="col-12 col-md-6" id="listB"></ul>
+  </div>
+  <button class="btn btn-warning" onclick="resolve()">Resolve</button>
+  <p id="result"></p>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
@@ -30,6 +47,47 @@
 
     Receber 2 listas e retirar os valores duplicados.
     */
+    // const listA = [];
+    // const listB = [];
+
+    const data = {
+      listA: [],
+      listB: []
+    }
+
+    // data.listA;
+    // data["listA"]
+
+    function addToList(listId) {
+      const value = document.getElementById("userInput").value
+      data[listId].push(value);
+      document.getElementById(listId).insertAdjacentHTML("beforeend", `<li>${value}</li>`)  // adicionar no inicio ou no fim um novo elemento
+    }
+
+    // function addToListA() {
+    //   const value = document.getElementById("userInput").value
+    //   listA.push(el);
+    //   document.getElementById("listA").insertAdjacentHTML("beforeend", `<li>${value}</li>`)  // adicionar no inicio ou no fim um novo elemento
+    // }
+
+    // function addToListB() {
+    //   const value = document.getElementById("userInput").value
+    //   listB.push(el);
+    //   document.getElementById("listB").insertAdjacentHTML("beforeend", `<li>${value}</li>`)
+
+    //   // const listItem = document.createElement("li");
+    //   // listItem.append(value);
+    //   // document.getElementById("listB").append(listItem);
+    // }
+
+    function resolve() {
+      // const allData = [...data.listA, ...data.listB];
+      const allData = data.listA.concat(data.listB);
+
+      const result = new Set(allData);
+
+      document.getElementById("result").innerHTML = Array.from(result).join(", ")
+    }
 
   </script>
 </body>
