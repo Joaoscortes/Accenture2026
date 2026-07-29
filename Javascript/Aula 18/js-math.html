@@ -10,7 +10,10 @@
 </head>
 
 <body>
+  <input type="text" id="userInput">
+  <button onclick="resolve()">Resolve</button>
 
+  <p id="result"></p>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
@@ -19,15 +22,15 @@
     /*
       Receber uma sequência de números separados por espaços e apresentar:
 
-      Maior número
-      Menor número
-      Soma
-      Média
-      Exemplo
+        Maior número
+        Menor número
+        Soma
+        Média
+        Exemplo
 
       Input
 
-      "5 10 15 20"
+      " 5 10 15 20 "
 
       Output
 
@@ -36,6 +39,54 @@
       Soma: 50
       Média: 12.5
     */
+
+    function resolve() {
+      // let userString = document.getElementById("userInput").value
+      // userString = userString.trim();
+      // let userStringArray = userString.split(" ")
+      // let userNumberArray = userStringArray.map(Number);
+
+      let numbers = document.getElementById("userInput")
+        .value
+        .trim()
+        .split(" ")
+        .map(Number);
+
+      // console.log(numbers) // [5,10,15,20]
+
+      //max
+      let max = numbers[0];
+      //min
+      let min = numbers[0];
+      //sum
+      let sum = numbers[0];
+      // loop
+      for (let index = 1; index < numbers.length; index++) {
+        const element = numbers[index];
+        sum += element;
+        if (element > max) {
+          max = element
+        }
+        if (element < min) {
+          min = element
+        }
+      }
+      //average
+      let average = sum / numbers.length;
+
+
+      // Output
+      document.getElementById("result").innerHTML = `
+Maior: ${Math.max(...numbers)}
+Menor: ${Math.min(...numbers)}
+Soma: ${resolveSum(numbers)}
+Média: ${average}
+        `
+    }
+
+    function resolveSum(a) {
+      return a.reduce((acc, value) => acc + value, 0);
+    }
 
 
   </script>
