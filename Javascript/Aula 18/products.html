@@ -10,6 +10,28 @@
 </head>
 
 <body>
+  // Form
+  <form>
+    <input type="text">
+    <input type="number">
+    <input type="number">
+
+    <button onclick="addProduct()">Add Product</button>
+  </form>
+
+  // Table
+  <table>
+    <thead>
+      <tr>
+        <th>Produto</th>
+        <th>Preço</th>
+        <th>Quantidade</th>
+        <th>Total</th>
+      </tr>
+    </thead>
+    <tbody id="tableBody"></tbody>
+  </table>
+  <p id="totalInventory"></p>
 
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
@@ -38,14 +60,52 @@ B       500   1           500€
 Text:
 Valor total do inventário: 1500€
     */
-
     // Class
+    class Product {
+      constructor(name, price, quantity) {
+        this.name = name;
+        this.price = price;
+        this.quantity = quantity;
+      }
 
-    // Input Data
+      totalValue() {
+        return this.price * this.quantity;
+      }
+    }
+
+    // Inputs
+    function getProductDataFromForm() {
+      return {
+        name: document.getElementById("inputName").value,
+        price: document.getElementById("inputPrice").value,
+        quantity: document.getElementById("inputQuantity").value,
+      }
+
+    }
 
     // Logic
+    function addProduct() {
+      // Inputs
+      const inputValues = getProductDataFromForm();
+
+      // create object from class
+      const newProduct = new Product(inputValues.name, inputValues.price, inputValues.quantity)
+
+      addProductToTableBody(newProduct);
+    }
 
     // Output
+    function addProductToTableBody(product) {
+      document.getElementById("tableBody").insertAdjacentHTML("beforeend", `
+      <tr>
+        <td>${product.name}</td>
+        <td>${product.price}</td>
+        <td>${product.quantity}</td>
+        <th>${product.totalValue()}</th>
+      </tr>
+      `)
+    }
+
 
   </script>
 
