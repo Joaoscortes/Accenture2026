@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+    <title>Api AAI User Book</title>
+</head>
+
+<body class="d-flex flex-column gap-5 bg-secondary container">
+    <div class="row mt-5">
+        <button type="button" class="btn btn-primary" onclick="getUsers()">Get All Users</button>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <input class="form-control" type="text" id="userId">
+        </div>
+        <button type="button" class="btn btn-primary col-md-2" onclick="getUserById()">Get Users by Id</button>
+        <button type="button" class="btn btn-light col-md-2" onclick="getUserByUsername()">Get Users by
+            Username</button>
+        <button type="button" class="btn btn-danger col-md-2" onclick="deleteUserById()">Delete Users by Id</button>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <input class="form-control" type="text" id="currentUsername">
+        </div>
+        <button type="button" class="btn btn-success col-md-6" onclick="updateUser()">Update User</button>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <input class="form-control" type="text" id="username">
+        </div>
+        <button type="button" class="btn btn-primary col-md-6" onclick="addUser()">Add User</button>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <input class="form-control" type="text" id="bookName">
+        </div>
+        <button type="button" class="btn btn-primary col-md-6" onclick="addBook()">Add Book</button>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <input class="form-control" type="text" id="bookTitle">
+        </div>
+        <button type="button" class="btn btn-info col-md-6" onclick="getUsersByBookTitle()">Get Users By Book
+            Attribute</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO"
+        crossorigin="anonymous"></script>
+    <script>
+        currentId = 0;
+        currentUser = {};
+
+        // Retrieves all users from the API, including their associated books.
+        function getUsers() {
+            fetch(
+                'https://aai-books-852480dfe047.herokuapp.com/api/users?filter={"include":"books"}')
+                .then(
+                    response => {
+                        if (response.ok) {
+                            return response.json()
+                        }
+                        console.error("Erro : ", response.status);
+                    }
+                ).then(data => {
+                    console.log(data);
+                })
+        }
+
+        // Fetches one user by their ID and stores the result as the current user.
+        function getUserById() {
+            let id = document.getElementById('userId').value;
+            fetch(
+                'https://aai-books-852480dfe047.herokuapp.com/api/users/' + id + '?filter={"include":"books"}')
+                .then(
+                    response => {
+                        if (response.ok) {
+                            return response.json()
+                        }
+                        console.error("Erro : ", response.status);
+                    }
+                ).then(data => {
+                    console.log(data);
+                    currentUser = data;
+                    currentId = data.id;
+                    document.getElementById('currentUsername').value = data.username;
+                })
+        }
+
+        // Searches for a user using their username and loads the matching record.
+        function getUserByUsername() {
+            let username = document.getElementById('userId').value;
+            fetch(
+                'https://aai-books-852480dfe047.herokuapp.com/api/users/findOne?filter={"where":{"username":"' + username + '"},"include":"books"}')
+                .then(
+                    response => {
+                        if (response.ok) {
+                            return response.json()
+                        }
+                        console.error("Erro : ", response.status);
+                    }
+                ).then(data => {
+                    console.log(data);
+                    currentUser = data;
+                    currentId = data.id;
+                    document.getElementById('currentUsername').value = data.username;
+                })
+        }
+
+        // Finds books by title and returns the related user information for each match.
+        function getUsersByBookTitle() {
+            let bookTitle = document.getElementById('bookTitle').value;
+            let query = {
+                where: {
+                    title: "" + bookTitle
+                },
+                include: {
+                    relation: "user",
+                    scope: {
+                        fields: ["username"]
+                    }
+                },
+                fields: ["userId", "title", "id"]
+            }
+            fetch(
+                'https://aai-books-852480dfe047.herokuapp.com/api/Books?filter=' + JSON.stringify(query))
+                .then(
+                    response => {
+                        if (response.ok) {
+                            return response.json();
+                        }
+                        console.error("Erro : ", response.status);
+                    }
+                ).then(data => {
+                    console.log(data);
+                })
+        }
+
+        // Deletes the selected user by ID from the API.
+        function deleteUserById() {
+            let id = document.getElementById('userId').value;
+            fetch(
+                'https://aai-books-852480dfe047.herokuapp.com/api/users/' + id, {
+                method: "DELETE"
+            }).then(
+                response => {
+                    if (response.ok) {
+                        console.log("Deleted");
+                    } else {
+                        console.error("Erro : ", response.status);
+                    }
+                }
+            )
+        }
+
+        // Updates the currently loaded user's username in the API.
+        function updateUser() {
+            currentUser.username = document.getElementById('currentUsername').value;
+            fetch(
+                'https://aai-books-852480dfe047.herokuapp.com/api/users/' + currentUser.id, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(currentUser)
+            }).then(
+                response => {
+                    if (response.ok) {
+                        console.log("Updated");
+                    } else {
+                        console.error("Erro : ", response.status);
+                    }
+                }
+            )
+        }
+
+        // Creates a new user with the value entered in the username field.
+        function addUser() {
+            tempUser = {
+                username: document.getElementById('username').value
+            }
+            console.log(tempUser);
+            fetch(
+                'https://aai-books-852480dfe047.herokuapp.com/api/users', {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(tempUser)
+            }).then(
+                response => {
+                    if (response.ok) {
+                        return response.json();
+                    }
+                    console.error("Erro : ", response.status);
+                }
+            ).then(data => {
+                console.log(data);
+            })
+        }
+
+        // Adds a new book to the currently selected user using the current user ID.
+        function addBook() {
+            let tempBook = {
+                title: document.getElementById('bookName').value
+            }
+            fetch(
+                'https://aai-books-852480dfe047.herokuapp.com/api/users/' + currentId + '/books', {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(tempBook)
+            }).then(
+                response => {
+                    if (response.ok) {
+                        return response.json();
+                    }
+                    console.error("Erro : ", response.status);
+                }
+            ).then(data => {
+                console.log(data);
+            })
+        }
+    </script>
+</body>
+
+</html>
