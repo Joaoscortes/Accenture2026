@@ -1,4 +1,5 @@
 package io.altar.jseproject.model;
+
 /*
 Um código (ID)
 Uma lista de prateleiras onde está exposto

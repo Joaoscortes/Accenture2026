@@ -1,4 +1,5 @@
 package io.altar.jseproject.model;
+
 /*
 Um código (ID)
 Capacidade
