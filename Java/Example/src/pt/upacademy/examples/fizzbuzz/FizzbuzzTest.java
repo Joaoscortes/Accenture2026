@@ -1,4 +1,4 @@
-package pt.upcademy.examples.fizzbuzz;
+package pt.upacademy.examples.fizzbuzz;
 
 public class FizzbuzzTest {
 

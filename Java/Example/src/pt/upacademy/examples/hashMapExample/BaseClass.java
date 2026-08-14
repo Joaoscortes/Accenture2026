@@ -1,4 +1,4 @@
-package pt.upcademy.examples.hashMapExample;
+package pt.upacademy.examples.hashMapExample;
 
 abstract class BaseClass {
 	private long id;

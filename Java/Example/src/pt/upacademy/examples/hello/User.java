@@ -1,4 +1,4 @@
-package pt.upcademy.examples.hello;
+package pt.upacademy.examples.hello;
 
 public class User {
  private String name;

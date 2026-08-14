@@ -1,4 +1,4 @@
-package pt.upcademy.examples.hello;
+package pt.upacademy.examples.hello;
 
 import java.util.ArrayList;
 import java.util.List;

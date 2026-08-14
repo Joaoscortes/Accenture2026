@@ -1,4 +1,4 @@
-package pt.upcademy.examples.hashMapExample;
+package pt.upacademy.examples.hashMapExample;
 
 import java.util.Collection;
 import java.util.HashMap;

@@ -1,4 +1,4 @@
-package pt.upcademy.examples.classExtends;
+package pt.upacademy.examples.classExtends;
 
 public class FelineCat {
 

@@ -1,4 +1,4 @@
-package pt.upcademy.examples.hashMapExample;
+package pt.upacademy.examples.hashMapExample;
 
 public class User extends BaseClass {
 	private String name;

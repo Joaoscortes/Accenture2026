@@ -1,4 +1,4 @@
-package pt.upcademy.examples.desafios;
+package pt.upacademy.examples.desafios;
 
 import java.util.ArrayList;
 import java.util.Arrays;
