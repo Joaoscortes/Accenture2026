@@ -1,4 +1,4 @@
-package io.altar.jseproject.utils;
+package io.altar.jseproject.pratica1.utils;
 
 import java.util.Scanner;
 import java.util.Set;

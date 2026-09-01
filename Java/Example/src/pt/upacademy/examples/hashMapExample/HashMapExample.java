@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-public class HashMapExample<T extends BaseClass> {
+public abstract class HashMapExample<T extends BaseClass> {
 	private Map<Long, T> db = new HashMap<Long, T>();
 	private long currentId = 0;
 
@@ -22,8 +22,8 @@ public class HashMapExample<T extends BaseClass> {
 		return db.get(id);
 	}
 
-	public void update(T user) {
-		db.put(user.getId(), user);
+	public void update(T entity) {
+		db.put(entity.getId(), entity);
 	}
 
 	public void delete(long id) {

@@ -1,6 +1,6 @@
-package io.altar.jseproject.textinterface;
+package io.altar.jseproject.pratica1.textinterface;
 
-import io.altar.jseproject.utils.ScannerUtils;
+import io.altar.jseproject.pratica1.utils.ScannerUtils;
 
 /**
  * Provides a text-based interface for managing products and shelves. Allows

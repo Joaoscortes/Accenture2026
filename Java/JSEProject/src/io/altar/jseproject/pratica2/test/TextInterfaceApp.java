@@ -1,6 +1,6 @@
-package io.altar.jseproject.test;
+package io.altar.jseproject.pratica2.test;
 
-import io.altar.jseproject.textinterface.TextInterface;
+import io.altar.jseproject.pratica2.textinterface.TextInterface;
 
 public class TextInterfaceApp {
 
