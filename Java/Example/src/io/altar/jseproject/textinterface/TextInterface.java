@@ -16,7 +16,16 @@ public class TextInterface {
 	 * produto 5) Voltar ao ecrã anterior
 	 */
 	public void productMenu() {
+		
+		int userOption = 0;
 
+		switch (userOption) {
+		case 5:
+			return;
+
+		default:
+			break;
+		}
 	}
 
 	/*
