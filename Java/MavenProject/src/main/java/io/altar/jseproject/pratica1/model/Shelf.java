@@ -1,8 +1,8 @@
-package io.altar.jseproject.pratica2.model;
+package io.altar.jseproject.pratica1.model;
 
 public class Shelf extends Entity_ {
 	private int capacity;
-	private Product product;
+	private long productId;
 	private float dailyPrice;
 
 	public Shelf() {
@@ -13,9 +13,9 @@ public class Shelf extends Entity_ {
 		this.dailyPrice = dailyPrice;
 	}
 
-	public Shelf(int capacity, Product product, float dailyPrice) {
+	public Shelf(int capacity, long productId, float dailyPrice) {
 		this.capacity = capacity;
-		this.product = product;
+		this.productId = productId;
 		this.dailyPrice = dailyPrice;
 	}
 
@@ -27,12 +27,12 @@ public class Shelf extends Entity_ {
 		this.capacity = capacity;
 	}
 
-	public Product getProduct() {
-		return product;
+	public long getProductId() {
+		return productId;
 	}
 
-	public void setProduct(Product product) {
-		this.product = product;
+	public void setProductId(long productId) {
+		this.productId = productId;
 	}
 
 	public float getDailyPrice() {
@@ -45,6 +45,7 @@ public class Shelf extends Entity_ {
 
 	@Override
 	public String toString() {
-		return "Shelf [capacity=" + capacity + ", productId=" + product.getId() + ", dailyPrice=" + dailyPrice + "]";
+		return "Shelf [capacity=" + capacity + ", productId=" + productId + ", dailyPrice=" + dailyPrice + "]";
 	}
+
 }

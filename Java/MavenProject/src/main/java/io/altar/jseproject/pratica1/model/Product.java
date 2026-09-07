@@ -1,10 +1,11 @@
-package io.altar.jseproject.pratica2.model;
+package io.altar.jseproject.pratica1.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Product extends Entity_ {
 
-	private List<Shelf> shelves;
+	private List<Long> shelvesIds = new ArrayList<Long>();
 	private int discount;
 	private int iva;
 	private float pvp;
@@ -18,27 +19,27 @@ public class Product extends Entity_ {
 		this.pvp = pvp;
 	}
 
-	public Product(List<Shelf> shelves, int discount, int iva, float pvp) {
-		this.shelves = shelves;
+	public Product(List<Long> shelvesIds, int discount, int iva, float pvp) {
+		this.shelvesIds = shelvesIds;
 		this.discount = discount;
 		this.iva = iva;
 		this.pvp = pvp;
 	}
 
-	public List<Shelf> getShelves() {
-		return shelves;
+	public List<Long> getShelvesIds() {
+		return shelvesIds;
 	}
 
-	public void setShelves(List<Shelf> shelves) {
-		this.shelves = shelves;
+	public void setShelvesIds(List<Long> shelvesIds) {
+		this.shelvesIds = shelvesIds;
 	}
 
-	public void addShelf(Shelf shelf) {
-		this.shelves.add(shelf);
+	public void addShelfId(long shelfId) {
+		this.shelvesIds.add(shelfId);
 	}
 
-	public void removeShelf(Shelf shelf) {
-		this.shelves.remove(shelf);
+	public void removeShelfId(long shelfId) {
+		this.shelvesIds.remove(shelfId);
 	}
 
 	public int getDiscount() {
@@ -67,8 +68,7 @@ public class Product extends Entity_ {
 
 	@Override
 	public String toString() {
-		return "Product [id=" + this.getId() + ", shelves=" + shelves + ", discount=" + discount + ", iva=" + iva
-				+ ", pvp=" + pvp + "]";
+		return "Product [shelvesIds=" + shelvesIds + ", discount=" + discount + ", iva=" + iva + ", pvp=" + pvp + "]";
 	}
 
 }
