@@ -17,7 +17,7 @@ public class CreateProduct extends State {
 		int iva = SCANNER_UTILS.getValidInt("Insira o iva", ivaOptions);
 		float pvp = SCANNER_UTILS.getFloat("Insira o pvp");
 		int discount = SCANNER_UTILS.getValidInt("Insira o discount", 0, 100);
-		if (SHELF_DB.getShelfIdsByProductId(0L).size() == 0) {
+		if (ss.getShelfIdsByProductId(0L).size() == 0) {
 			save(discount, iva, pvp);
 		} else {
 			System.out.println("Quer adicionar o produto a uma prateleira vazia?");
@@ -36,19 +36,19 @@ public class CreateProduct extends State {
 
 	private void save(int discount, int iva, float pvp) {
 		Product product = new Product(discount, iva, pvp);
-		PRODUCT_DB.add(product);
+		ps.add(product);
 	}
 
 	private void save(List<Long> shelfIds, int discount, int iva, float pvp) {
 		List<Shelf> shelves = shelfIds.stream().map(entityId -> {
-			return SHELF_DB.get(entityId);
+			return ss.get(entityId);
 		}).collect(Collectors.toList());
 		Product product = new Product(shelves, discount, iva, pvp);
-		PRODUCT_DB.add(product);
+		ps.add(product);
 	}
 
 	private void addToShelf(int discount, int iva, float pvp, List<Long> shelfIds) {
-		Set<Long> options = SHELF_DB.getShelfIdsByProductId(0L).stream()
+		Set<Long> options = ss.getShelfIdsByProductId(0L).stream()
 				.filter(shelfId -> shelfIds.indexOf(shelfId) == -1).collect(Collectors.toSet());
 		System.out.println("Prateleiras disponiveis" + options);
 		long option = SCANNER_UTILS.getValidLong("Selecionar Id da prateleira ", options);
