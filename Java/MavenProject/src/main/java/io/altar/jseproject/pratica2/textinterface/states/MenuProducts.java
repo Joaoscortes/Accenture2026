@@ -3,7 +3,7 @@ package io.altar.jseproject.pratica2.textinterface.states;
 import io.altar.jseproject.pratica2.repositories.ProductRepository;
 
 public class MenuProducts extends State {
-	private ProductRepository DBP = ProductRepository.getInstance();
+	private ProductRepository DBP;
 
 	public int on() {
 		DBP.getAllIds().forEach(id -> System.out.println("ID do produto : " + id));

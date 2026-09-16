@@ -2,6 +2,8 @@ package io.altar.jseproject.pratica2.controllers;
 
 import java.util.Collection;
 
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -17,9 +19,12 @@ import io.altar.jseproject.pratica2.model.Product;
 import io.altar.jseproject.pratica2.services.ProductService;
 import io.altar.jseproject.pratica2.utils.exceptions.MyException;
 
+@RequestScoped
 @Path("products")
 public class ProductController {
-	private ProductService ps = new ProductService();
+
+	@Inject
+	private ProductService ps;
 
 //	GET | POST / PUT | DELETE
 
@@ -35,7 +40,7 @@ public class ProductController {
 	public Collection<Product> getAll() {
 		return ps.getAll();
 	}
-	
+
 	@GET
 	@Path("{id}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -58,7 +63,7 @@ public class ProductController {
 			return Response.status(400).entity(e.getMessage()).build();
 		}
 	}
-	
+
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response edit(Product p) {
@@ -69,7 +74,7 @@ public class ProductController {
 			return Response.status(400).entity(e.getMessage()).build();
 		}
 	}
-	
+
 	@DELETE
 	@Path("{id}")
 	public Response remove(@PathParam("id") long id) {
@@ -80,5 +85,5 @@ public class ProductController {
 			return Response.status(400).entity(e.getMessage()).build();
 		}
 	}
-	
+
 }

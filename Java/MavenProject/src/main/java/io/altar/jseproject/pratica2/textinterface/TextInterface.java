@@ -17,11 +17,11 @@ public class TextInterface {
 	/**
 	 * Singleton instance of the product repository.
 	 */
-	private ProductRepository DBP = ProductRepository.getInstance();
+	private ProductRepository DBP;
 	/**
 	 * Singleton instance of the shelf repository.
 	 */
-	private ShelfRepository DBS = ShelfRepository.getInstance();
+	private ShelfRepository DBS;
 
 	/**
 	 * Displays the main menu and handles user navigation between product and shelf

@@ -3,15 +3,21 @@ package io.altar.jseproject.pratica2.services;
 import java.util.Collection;
 import java.util.Set;
 
+import javax.inject.Inject;
+import javax.transaction.Transactional;
+
 import io.altar.jseproject.pratica2.model.Entity_;
 import io.altar.jseproject.pratica2.repositories.EntityRepository;
 import io.altar.jseproject.pratica2.utils.interfaces.CRUD_Interface;
 
-public abstract class EntityService<U extends EntityRepository<T>, T extends Entity_> implements CRUD_Interface<T> {
-	public U repo;
+@Transactional
+public abstract class EntityService<R extends EntityRepository<M>, M extends Entity_> implements CRUD_Interface<M> {
+
+	@Inject
+	protected R repo;
 
 	@Override
-	public long add(T e) {
+	public long add(M e) {
 		return repo.add(e);
 	}
 
@@ -22,13 +28,13 @@ public abstract class EntityService<U extends EntityRepository<T>, T extends Ent
 	}
 
 	@Override
-	public Collection<T> getAll() {
+	public Collection<M> getAll() {
 		// TODO Auto-generated method stub
 		return repo.getAll();
 	}
 
 	@Override
-	public T get(long id) {
+	public M get(long id) {
 		// TODO Auto-generated method stub
 		return repo.get(id);
 	}

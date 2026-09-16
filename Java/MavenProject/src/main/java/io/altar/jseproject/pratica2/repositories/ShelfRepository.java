@@ -4,18 +4,21 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.enterprise.context.ApplicationScoped;
+
 import io.altar.jseproject.pratica2.model.Shelf;
 
+@ApplicationScoped
 public class ShelfRepository extends EntityRepository<Shelf> {
 
-	private static final ShelfRepository INSTANCE = new ShelfRepository();
-
-	private ShelfRepository() {
-	}
-
-	public static ShelfRepository getInstance() {
-		return INSTANCE;
-	}
+//	private static final ShelfRepository INSTANCE = new ShelfRepository();
+//
+//	private ShelfRepository() {
+//	}
+//
+//	public static ShelfRepository getInstance() {
+//		return INSTANCE;
+//	}
 	
 	public List<Long> getShelfIdsByProductId(long productId) {
 		Collection<Shelf> values = this.getAll();

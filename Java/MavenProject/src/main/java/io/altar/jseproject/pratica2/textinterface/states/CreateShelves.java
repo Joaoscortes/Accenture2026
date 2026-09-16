@@ -4,7 +4,7 @@ import io.altar.jseproject.pratica2.model.Shelf;
 import io.altar.jseproject.pratica2.repositories.ShelfRepository;
 
 public class CreateShelves extends State {
-	private ShelfRepository DBS = ShelfRepository.getInstance();
+	private ShelfRepository DBS;
 
 	public int on() {
 		System.out.println("Criar prateleira");
