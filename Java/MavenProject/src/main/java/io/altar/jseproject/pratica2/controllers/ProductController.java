@@ -1,6 +1,7 @@
 package io.altar.jseproject.pratica2.controllers;
 
 import java.util.Collection;
+import java.util.stream.Collectors;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -16,6 +17,9 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import io.altar.jseproject.pratica2.model.Product;
+import io.altar.jseproject.pratica2.model.converters.EntityConverter;
+import io.altar.jseproject.pratica2.model.converters.ProductConverter;
+import io.altar.jseproject.pratica2.model.dtos.ProductDTO;
 import io.altar.jseproject.pratica2.services.ProductService;
 import io.altar.jseproject.pratica2.utils.exceptions.MyException;
 
@@ -25,6 +29,9 @@ public class ProductController {
 
 	@Inject
 	private ProductService ps;
+	
+	@Inject
+	private ProductConverter pc;
 
 //	GET | POST / PUT | DELETE
 
@@ -37,8 +44,8 @@ public class ProductController {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public Collection<Product> getAll() {
-		return ps.getAll();
+	public Collection<ProductDTO> getAll() {
+		return ps.getAll().stream().map(e -> pc.toDTO(e)).collect(Collectors.toList());
 	}
 
 	@GET
@@ -46,7 +53,7 @@ public class ProductController {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response get(@PathParam("id") long id) {
 		try {
-			Product p = ps.get(id);
+			ProductDTO p = pc.toDTO(ps.get(id));
 			return Response.status(200).entity(p).build();
 		} catch (MyException e) {
 			return Response.status(400).entity(e.getMessage()).build();
@@ -55,8 +62,9 @@ public class ProductController {
 
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response add(Product p) {
+	public Response add(ProductDTO dto) {
 		try {
+			Product p = pc.toEntity(dto);
 			long id = ps.add(p);
 			return Response.status(200).entity(id).build();
 		} catch (MyException e) {
@@ -66,8 +74,9 @@ public class ProductController {
 
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response edit(Product p) {
+	public Response edit(ProductDTO dto) {
 		try {
+			Product p = pc.toEntity(dto);
 			ps.edit(p);
 			return Response.ok().build();
 		} catch (MyException e) {
