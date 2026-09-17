@@ -23,4 +23,9 @@ public class ShelfService extends EntityService<ShelfRepository, Shelf> {
 	public void edit(Shelf s) {
 		repo.edit(s);
 	}
+
+	public List<Shelf> getAllShelvesFromProductId(long id) {
+		// TODO Auto-generated method stub
+		return repo.getAllShelvesFromProductId(id);
+	}
 }

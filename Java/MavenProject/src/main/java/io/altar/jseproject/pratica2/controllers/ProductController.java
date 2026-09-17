@@ -15,6 +15,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.sse.Sse;
 
 import io.altar.jseproject.pratica2.model.Product;
 import io.altar.jseproject.pratica2.model.converters.EntityConverter;
@@ -64,7 +65,8 @@ public class ProductController {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response add(ProductDTO dto) {
 		try {
-			Product p = pc.toEntity(dto);
+			Product p = dto.toEntity();
+			p.setShelves(ps.getAllShelvesFromProductId(p.getId()));
 			long id = ps.add(p);
 			return Response.status(200).entity(id).build();
 		} catch (MyException e) {
