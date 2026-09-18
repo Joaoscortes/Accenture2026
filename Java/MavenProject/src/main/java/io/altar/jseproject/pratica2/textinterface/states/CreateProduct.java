@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import io.altar.jseproject.pratica2.model.Product;
-import io.altar.jseproject.pratica2.model.Shelf;
+import io.altar.jseproject.pratica2.models.entities.Product;
+import io.altar.jseproject.pratica2.models.entities.Shelf;
 
 public class CreateProduct extends State {
 
@@ -48,8 +48,8 @@ public class CreateProduct extends State {
 	}
 
 	private void addToShelf(int discount, int iva, float pvp, List<Long> shelfIds) {
-		Set<Long> options = ss.getShelfIdsByProductId(0L).stream()
-				.filter(shelfId -> shelfIds.indexOf(shelfId) == -1).collect(Collectors.toSet());
+		Set<Long> options = ss.getShelfIdsByProductId(0L).stream().filter(shelfId -> shelfIds.indexOf(shelfId) == -1)
+				.collect(Collectors.toSet());
 		System.out.println("Prateleiras disponiveis" + options);
 		long option = SCANNER_UTILS.getValidLong("Selecionar Id da prateleira ", options);
 		shelfIds.add(option);

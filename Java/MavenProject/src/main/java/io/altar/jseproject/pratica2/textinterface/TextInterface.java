@@ -1,7 +1,7 @@
 package io.altar.jseproject.pratica2.textinterface;
 
 import io.altar.jseproject.pratica1.utils.ScannerUtils;
-import io.altar.jseproject.pratica2.model.Shelf;
+import io.altar.jseproject.pratica2.models.entities.Shelf;
 import io.altar.jseproject.pratica2.repositories.ProductRepository;
 import io.altar.jseproject.pratica2.repositories.ShelfRepository;
 

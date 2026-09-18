@@ -6,19 +6,10 @@ import java.util.stream.Collectors;
 
 import javax.enterprise.context.ApplicationScoped;
 
-import io.altar.jseproject.pratica2.model.Shelf;
+import io.altar.jseproject.pratica2.models.entities.Shelf;
 
 @ApplicationScoped
 public class ShelfRepository extends EntityRepository<Shelf> {
-
-//	private static final ShelfRepository INSTANCE = new ShelfRepository();
-//
-//	private ShelfRepository() {
-//	}
-//
-//	public static ShelfRepository getInstance() {
-//		return INSTANCE;
-//	}
 
 	public List<Long> getShelfIdsByProductId(long productId) {
 		Collection<Shelf> values = this.getAll();
@@ -38,4 +29,7 @@ public class ShelfRepository extends EntityRepository<Shelf> {
 		return result;
 	}
 
+	public void removeProductsByProductId(long id) {
+		// TODO Auto-generated method stub
+	}
 }

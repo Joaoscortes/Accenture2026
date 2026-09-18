@@ -1,8 +1,8 @@
-package io.altar.jseproject.pratica2.model.dtos;
+package io.altar.jseproject.pratica2.models.DTOs;
 
 public abstract class EntityDTO {
 
-	protected long id = -1;
+	protected long id;
 
 	public long getId() {
 		return id;
@@ -11,5 +11,4 @@ public abstract class EntityDTO {
 	public void setId(long id) {
 		this.id = id;
 	}
-
 }

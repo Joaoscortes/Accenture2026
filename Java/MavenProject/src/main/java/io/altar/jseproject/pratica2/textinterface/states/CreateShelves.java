@@ -1,6 +1,6 @@
 package io.altar.jseproject.pratica2.textinterface.states;
 
-import io.altar.jseproject.pratica2.model.Shelf;
+import io.altar.jseproject.pratica2.models.entities.Shelf;
 import io.altar.jseproject.pratica2.repositories.ShelfRepository;
 
 public class CreateShelves extends State {

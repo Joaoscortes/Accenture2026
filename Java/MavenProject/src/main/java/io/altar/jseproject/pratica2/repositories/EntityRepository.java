@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-import io.altar.jseproject.pratica2.model.Entity_;
+import io.altar.jseproject.pratica2.models.entities.Entity_;
 import io.altar.jseproject.pratica2.utils.interfaces.CRUD_Interface;
 
 public abstract class EntityRepository<T extends Entity_> implements CRUD_Interface<T> {

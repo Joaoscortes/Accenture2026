@@ -6,7 +6,7 @@ import java.util.Set;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 
-import io.altar.jseproject.pratica2.model.Entity_;
+import io.altar.jseproject.pratica2.models.entities.Entity_;
 import io.altar.jseproject.pratica2.repositories.EntityRepository;
 import io.altar.jseproject.pratica2.utils.interfaces.CRUD_Interface;
 
@@ -16,33 +16,47 @@ public abstract class EntityService<R extends EntityRepository<M>, M extends Ent
 	@Inject
 	protected R repo;
 
-	@Override
-	public long add(M e) {
-		return repo.add(e);
+	public abstract String getClassName();
+
+	public long add(M entity) {
+		return repo.add(entity);
 	}
 
-	@Override
 	public Set<Long> getAllIds() {
-		// TODO Auto-generated method stub
 		return repo.getAllIds();
 	}
 
-	@Override
 	public Collection<M> getAll() {
-		// TODO Auto-generated method stub
 		return repo.getAll();
 	}
 
-	@Override
 	public M get(long id) {
-		// TODO Auto-generated method stub
-		return repo.get(id);
+		return validEntity(id);
 	}
 
-	@Override
+	public void edit(M entity) {
+		validEntity(entity.getId());
+		repo.edit(entity);
+	}
+
 	public void remove(long id) {
 		repo.remove(id);
+	}
 
+	public boolean isEmpty() {
+		return repo.isEmpty();
+	}
+
+	public long size() {
+		return repo.size();
+	}
+
+	public M validEntity(long entityId) {
+		M entity = repo.get(entityId);
+		if (entity == null) {
+			throw new IllegalArgumentException(String.format("No %s with Id [%d].", getClassName(), entityId));
+		}
+		return entity;
 	}
 
 }

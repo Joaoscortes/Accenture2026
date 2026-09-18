@@ -3,7 +3,7 @@ package io.altar.jseproject.pratica2.utils.interfaces;
 import java.util.Collection;
 import java.util.Set;
 
-import io.altar.jseproject.pratica2.model.Entity_;
+import io.altar.jseproject.pratica2.models.entities.Entity_;
 
 public interface CRUD_Interface<T extends Entity_> {
 
