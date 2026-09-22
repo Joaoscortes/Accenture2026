@@ -32,4 +32,22 @@ public class ShelfRepository extends EntityRepository<Shelf> {
 	public void removeProductsByProductId(long id) {
 		// TODO Auto-generated method stub
 	}
+
+	@Override
+	protected Class<Shelf> getEntityClass() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected String getAllEntities() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected String getAllEntitiesIds() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

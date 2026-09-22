@@ -7,9 +7,9 @@ import io.altar.jseproject.pratica2.models.entities.Entity_;
 
 public interface CRUD_Interface<T extends Entity_> {
 
-	long add(T e);
+	T add(T e);
 
-	Set<Long> getAllIds();
+	Collection<Long> getAllIds();
 
 	Collection<T> getAll();
 

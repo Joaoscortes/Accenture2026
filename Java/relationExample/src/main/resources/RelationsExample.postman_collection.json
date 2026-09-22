@@ -1,0 +1,102 @@
+{
+	"info": {
+		"_postman_id": "2e10b42d-7d20-4c59-ac3e-eb02a12d6be2",
+		"name": "RelationsExample",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "oneToMany",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8080/relationExample/oneToMany",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"relationExample",
+						"oneToMany"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "manyToOne",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8080/relationExample/manyToOne",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"relationExample",
+						"manyToOne"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "manyToMany",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8080/relationExample/manyToMany",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"relationExample",
+						"manyToMany"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "manyToManySubscription",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8080/relationExample/manyToManySubscription",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"relationExample",
+						"manyToManySubscription"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

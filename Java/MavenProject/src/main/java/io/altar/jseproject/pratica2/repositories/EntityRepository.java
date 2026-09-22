@@ -1,51 +1,58 @@
 package io.altar.jseproject.pratica2.repositories;
 
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 import io.altar.jseproject.pratica2.models.entities.Entity_;
 import io.altar.jseproject.pratica2.utils.interfaces.CRUD_Interface;
 
 public abstract class EntityRepository<T extends Entity_> implements CRUD_Interface<T> {
 
-	private Map<Long, T> map = new HashMap<Long, T>();
+	
+	@PersistenceContext(unitName = "database")
+	protected EntityManager entityManager;
+	
+	protected abstract Class<T> getEntityClass();
+	
+	protected abstract String getAllEntities();
+	
+	protected abstract String getAllEntitiesIds();
 
-	private long currentID = 1;
 
-	public long add(T entity) {
-		map.put(currentID, entity);
-		entity.setId(currentID);
-		return currentID++;
+	public T add(T entity) {
+		return entityManager.merge(entity);
 	}
 
-	public Set<Long> getAllIds() {
-		return map.keySet();
+	public Collection<Long> getAllIds() {
+		return entityManager.createNamedQuery(getAllEntitiesIds(), Long.class).getResultList();
 	}
 
 	public Collection<T> getAll() {
-		return map.values();
+		return entityManager.createNamedQuery(getAllEntities(), getEntityClass()).getResultList();
 	}
 
 	public T get(long id) {
-		T entity = map.get(id);
-		return entity;
+		return entityManager.find(getEntityClass(), id);
 	}
 
 	public void edit(T entity) {
-		map.put(entity.getId(), entity);
+		entityManager.merge(entity);
 	}
 
 	public void remove(long id) {
-		map.remove(id);
+		T entity = get(id);
+		if(entity != null) {
+			entityManager.remove(entity);
+		}
 	}
 
 	public boolean isEmpty() {
-		return (map.size() == 0) ? true : false;
+		return false;
 	}
 
 	public long size() {
-		return map.size();
+		return 0;
 	}
 }

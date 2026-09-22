@@ -40,4 +40,22 @@ public class ProductRepository extends EntityRepository<Product> {
 
 		return result;
 	}
+
+	@Override
+	protected Class<Product> getEntityClass() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected String getAllEntities() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected String getAllEntitiesIds() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

@@ -18,11 +18,11 @@ public abstract class EntityService<R extends EntityRepository<M>, M extends Ent
 
 	public abstract String getClassName();
 
-	public long add(M entity) {
+	public M add(M entity) {
 		return repo.add(entity);
 	}
 
-	public Set<Long> getAllIds() {
+	public Collection<Long> getAllIds() {
 		return repo.getAllIds();
 	}
 

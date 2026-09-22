@@ -74,8 +74,8 @@ public abstract class EntityController<S extends EntityService<R, E>, R extends 
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response add(D entityDTO) {
 		try {
-			long currentId = service.add(converter.toEntity(entityDTO));
-			return Response.status(200).entity(currentId).build();
+			E current = service.add(converter.toEntity(entityDTO));
+			return Response.status(200).entity(current).build();
 		} catch (UnsupportedOperationException e) {
 			return Response.status(403).entity(e.getMessage()).build();
 		} catch (IllegalArgumentException e) {

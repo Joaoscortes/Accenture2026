@@ -1,5 +1,6 @@
 package io.altar.jseproject.pratica1.utils;
 
+import java.util.Collection;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -189,7 +190,7 @@ public class ScannerUtils {
 	 * @param values the set of valid long values
 	 * @return the valid long entered by the user
 	 */
-	public int getValidLong(String msg, Set<Long> values) {
+	public int getValidLong(String msg, Collection<Long> values) {
 		do {
 			StringBuilder validStringBuilder = new StringBuilder(msg + "(");
 			for (long i : values) {

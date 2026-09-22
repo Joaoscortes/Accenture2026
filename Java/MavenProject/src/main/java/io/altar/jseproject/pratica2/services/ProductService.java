@@ -23,13 +23,13 @@ public class ProductService extends EntityService<ProductRepository, Product> {
 	}
 
 	@Override
-	public long add(Product product) {
-		long currentId = repo.add(product);
+	public Product add(Product product) {
+		Product current = repo.add(product);
 		if (product.getShelves() != null && product.getShelves().size() > 0) {
 			SHELF_SERVICE.updateProductOnShelfs(product, new ArrayList<Long>(),
 					product.getShelves().stream().map(Shelf::getId).collect(Collectors.toList()));
 		}
-		return currentId;
+		return current;
 	}
 
 	@Override
