@@ -34,7 +34,6 @@ public abstract class EntityPersistence<E extends Entity_> implements ICRUD<E> {
 		if (e != null) {
 			em.remove(e);
 		}
-
 	}
 
 }
