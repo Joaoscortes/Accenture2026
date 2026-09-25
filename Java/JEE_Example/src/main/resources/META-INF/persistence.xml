@@ -12,9 +12,9 @@
 
 		<properties>
 			<!-- Propriedades JDBC -->
-			<property
+			<!-- <property
 				name="javax.persistence.schema-generation.database.action"
-				value="drop-and-create" />
+				value="drop-and-create" /> -->
 				
 			<!-- Configurações específicas do Hibernate -->
 			<property name="hibernate.dialect"
