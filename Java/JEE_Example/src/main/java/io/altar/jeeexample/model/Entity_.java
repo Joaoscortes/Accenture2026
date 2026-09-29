@@ -1,5 +1,7 @@
 package io.altar.jeeexample.model;
 
+import java.io.Serializable;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -11,8 +13,9 @@ import javax.persistence.MappedSuperclass;
  * annotations to define the entity structure and mapping.
  */
 @MappedSuperclass
-public abstract class Entity_ {
+public abstract class Entity_ implements Serializable {
 
+	private static final long serialVersionUID = 1L;
 	/**
 	 * The unique identifier of the entity.
 	 */

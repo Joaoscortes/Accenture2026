@@ -13,7 +13,7 @@ import io.altar.jeeexample.service.UserService;
  * User entities.
  */
 @RequestScoped
-@Path("user")
+@Path("users")
 public class UserController extends EntityController<UserService, UserPersistence, User> {
 
 }

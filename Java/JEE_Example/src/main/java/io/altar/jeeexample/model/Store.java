@@ -9,10 +9,24 @@ import javax.persistence.Entity;
 @Entity
 public class Store extends Entity_ {
 
+	private static final long serialVersionUID = 1L;
+
 	private String name;
 	private String location;
 	private int[] opening;
 	private int code;
+
+	
+	public Store() {
+		super();
+	}
+
+	public Store(String name, String location, int code) {
+		super();
+		this.name = name;
+		this.location = location;
+		this.code = code;
+	}
 
 	/**
 	 * Gets the store's name.

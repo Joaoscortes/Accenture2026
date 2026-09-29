@@ -9,6 +9,8 @@ import javax.persistence.Entity;
 @Entity
 public class User extends Entity_ {
 
+	private static final long serialVersionUID = 1L;
+
 	private String name;
 	private String email;
 	private String password;

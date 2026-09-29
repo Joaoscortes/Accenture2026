@@ -13,7 +13,7 @@ import io.altar.jeeexample.service.StoreService;
  * Store entities.
  */
 @RequestScoped
-@Path("store")
+@Path("stores")
 public class StoreController extends EntityController<StoreService, StorePersistence, Store> {
 
 }
