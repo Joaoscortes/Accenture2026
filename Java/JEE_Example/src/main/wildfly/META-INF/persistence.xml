@@ -4,13 +4,20 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
 	<!-- Unidade de persistencia -->
-	<persistence-unit name="database" transaction-type="JTA">
+	<persistence-unit name="database"
+		transaction-type="JTA">
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 		<!-- Implementação do JPA -->
 		<jta-data-source>java:/MySqlJEEDS</jta-data-source>
 
 		<properties>
-			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" />
+			<!-- Propriedades JDBC 
+			<property
+				name="javax.persistence.schema-generation.database.action"
+				value="drop-and-create" />
+			-->
+			<property name="hibernate.dialect"
+				value="org.hibernate.dialect.MySQL5InnoDBDialect" />
 			<property name="hibernate.hbm2ddl.auto" value="update" />
 			<property name="hibernate.show_sql" value="true" />
 			<property name="hibernate.format_sql" value="true" />
