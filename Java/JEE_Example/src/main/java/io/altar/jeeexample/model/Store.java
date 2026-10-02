@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 @Entity
 public class Store extends Entity_ {
 
+
 	private static final long serialVersionUID = 1L;
 
 	private String name;
