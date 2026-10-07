@@ -80,3 +80,11 @@ Scripts/
 ## OS X
 ##############################
 .DS_Store
+
+node_modules/
+dist/
+.angular/
+.cache/
+coverage/
+.env
+.DS_Store
