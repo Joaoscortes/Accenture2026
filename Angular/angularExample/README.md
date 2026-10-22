@@ -13,6 +13,14 @@ ng serve
 
 Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
 
+## Authentication API
+
+Login, register (`/register`) and password recovery (`/recover-password`) use the
+`auth-example` backend (`/auth-example/api/users`). `ng serve` proxies
+`/auth-example` to `http://127.0.0.1:8080` (see `proxy.conf.json`), so the backend must be
+running there. The profile is loaded from `GET /users/me` after login (falling back to the JWT claims). The JWT is kept in `localStorage` and sent as a bearer token on same-origin
+requests. New accounts are registered with role `USER`.
+
 ## Code scaffolding
 
 Angular CLI includes powerful code scaffolding tools. To generate a new component, run:

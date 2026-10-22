@@ -1,11 +1,14 @@
-export interface IUser {}
+export interface User {
+  username: string;
+  email?: string;
+  age?: number;
+  role?: string;
+}
 
-export class User implements IUser {
-    'id'?: number;
-    'username'?: string;
-    'password'?: string;
-
-    constructor(data?: Partial<User>) {
-        Object.assign(this, data);
-    }
+export interface RegisterRequest {
+  username: string;
+  email: string;
+  password: string;
+  age: number;
+  role: string;
 }

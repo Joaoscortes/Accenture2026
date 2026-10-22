@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { AuthService } from '../../services/auth';
 
 @Component({
   imports: [],
@@ -6,4 +7,6 @@ import { Component } from '@angular/core';
   styleUrl: './profile.scss',
   templateUrl: './profile.html',
 })
-export class Profile {}
+export class Profile {
+  readonly user = inject(AuthService).currentUser;
+}

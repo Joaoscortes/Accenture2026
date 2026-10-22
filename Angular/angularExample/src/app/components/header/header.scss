@@ -1,0 +1,60 @@
+.navbar {
+  align-items: center;
+  background: #fff;
+  border-bottom: 1px solid #e5e7eb;
+  display: flex;
+  gap: 24px;
+  justify-content: space-between;
+  padding: 16px 30px;
+}
+
+.logo {
+  color: #111827;
+  font-size: 20px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+nav,
+.account {
+  align-items: center;
+  display: flex;
+  gap: 20px;
+}
+
+nav a {
+  color: #374151;
+  text-decoration: none;
+
+  &:hover,
+  &.active {
+    color: #2563eb;
+  }
+}
+
+.account span {
+  color: #4b5563;
+}
+
+button {
+  background: #dc2626;
+  border: 0;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+  padding: 8px 14px;
+}
+
+@media (max-width: 600px) {
+  .navbar {
+    align-items: flex-start;
+    flex-wrap: wrap;
+    padding: 16px 20px;
+  }
+
+  nav {
+    flex-wrap: wrap;
+    order: 1;
+    width: 100%;
+  }
+}

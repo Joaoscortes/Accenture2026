@@ -1,0 +1,16 @@
+<main class="content">
+  <h1>Information</h1>
+  <p class="subtitle">Latest information and announcements</p>
+
+  <div class="information-list">
+    @for (item of information; track item.id) {
+      <article class="information-card">
+        <header class="information-header">
+          <h2>{{ item.title }}</h2>
+          <time [attr.datetime]="item.date">{{ item.date }}</time>
+        </header>
+        <p>{{ item.description }}</p>
+      </article>
+    }
+  </div>
+</main>

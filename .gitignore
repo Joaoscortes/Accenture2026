@@ -88,3 +88,5 @@ dist/
 coverage/
 .env
 .DS_Store
+agents/
+agents/**

@@ -1,1 +1,33 @@
-<p>profile works!</p>
+<main class="content">
+  <section class="card">
+    <h1>User Profile</h1>
+    @if (user(); as currentUser) {
+      <dl class="profile">
+        <div class="profile-field">
+          <dt>Username</dt>
+          <dd>{{ currentUser.username }}</dd>
+        </div>
+        @if (currentUser.email) {
+          <div class="profile-field">
+            <dt>Email</dt>
+            <dd>{{ currentUser.email }}</dd>
+          </div>
+        }
+        @if (currentUser.age !== undefined) {
+          <div class="profile-field">
+            <dt>Age</dt>
+            <dd>{{ currentUser.age }}</dd>
+          </div>
+        }
+        @if (currentUser.role) {
+          <div class="profile-field">
+            <dt>Role</dt>
+            <dd>{{ currentUser.role }}</dd>
+          </div>
+        }
+      </dl>
+    } @else {
+      <p>Your profile is not available.</p>
+    }
+  </section>
+</main>

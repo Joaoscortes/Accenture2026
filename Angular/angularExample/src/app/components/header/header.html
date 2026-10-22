@@ -1,1 +1,14 @@
-<p>header works!</p>
+<header class="navbar">
+  <a class="logo" routerLink="/">My Application</a>
+  <nav aria-label="Main navigation">
+    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
+    <a routerLink="/profile" routerLinkActive="active">Profile</a>
+    <a routerLink="/info" routerLinkActive="active">Information</a>
+  </nav>
+  <div class="account">
+    @if (currentUser(); as user) {
+      <span>{{ user.username }}</span>
+    }
+    <button type="button" (click)="logout()">Logout</button>
+  </div>
+</header>

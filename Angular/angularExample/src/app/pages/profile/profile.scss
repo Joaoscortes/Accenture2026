@@ -1,0 +1,39 @@
+.content {
+  margin: 40px auto;
+  max-width: 800px;
+  padding: 0 20px;
+}
+
+.card {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 5px 20px rgb(0 0 0 / 5%);
+  padding: 30px;
+
+  h1 {
+    margin-top: 0;
+  }
+}
+
+.profile {
+  margin: 25px 0 0;
+}
+
+.profile-field {
+  align-items: baseline;
+  border-bottom: 1px solid #e5e7eb;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 16px 0;
+
+  dt {
+    color: #6b7280;
+    font-weight: 600;
+  }
+
+  dd {
+    color: #111827;
+    margin: 0;
+  }
+}
