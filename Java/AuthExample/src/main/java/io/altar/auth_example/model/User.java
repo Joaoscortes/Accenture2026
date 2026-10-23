@@ -1,6 +1,8 @@
 package io.altar.auth_example.model;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 
 import io.altar.auth_example.util.PasswordUtil;
 
@@ -13,6 +15,7 @@ public class User extends Entity_ {
 	private String email;
 	private String password;
 	private int age;
+	@Enumerated(EnumType.STRING)
 	private Role role;
 
 	
