@@ -22,6 +22,18 @@ describe('AuthService', () => {
 
   afterEach(() => httpTesting.verify());
 
+  it('updates the photo and the stored user', () => {
+    service.updatePhoto('https://x.test/a.png').subscribe();
+
+    const req = httpTesting.expectOne('/auth-example/api/users/me/photo');
+    expect(req.request.method).toBe('PUT');
+    expect(req.request.body).toEqual({ photoUrl: 'https://x.test/a.png' });
+    req.flush({ username: 'john', photoUrl: 'https://x.test/a.png' });
+
+    expect(service.currentUser()?.photoUrl).toBe('https://x.test/a.png');
+    expect(localStorage.getItem('current_user')).toContain('a.png');
+  });
+
   it('logs in, stores the token and loads the user from /users/me', () => {
     service.login({ username: 'john', password: 'secret1' }).subscribe();
 

@@ -8,6 +8,7 @@ public class UserResponse {
     private String email;
     private int age;
     private String role;
+    private String photoUrl;
 
     public UserResponse() {}
 
@@ -17,6 +18,11 @@ public class UserResponse {
         this.email = user.getEmail();
         this.age = user.getAge();
         this.role = user.getRole() != null ? user.getRole().name() : null;
+        this.photoUrl = user.getPhotoUrl();
+    }
+
+    public String getPhotoUrl() {
+        return photoUrl;
     }
 
     public long getId() {

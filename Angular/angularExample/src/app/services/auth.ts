@@ -47,6 +47,12 @@ export class AuthService {
       .pipe(map(() => undefined));
   }
 
+  updatePhoto(photoUrl: string): Observable<User> {
+    return this.http
+      .put<User>(`${API_URL}/me/photo`, { photoUrl })
+      .pipe(tap((user) => this.setUser({ ...this.currentUserSignal(), ...user })));
+  }
+
   logout(): void {
     localStorage.removeItem(this.tokenKey);
     localStorage.removeItem(this.userKey);

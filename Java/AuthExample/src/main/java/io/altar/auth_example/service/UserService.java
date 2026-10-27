@@ -30,6 +30,10 @@ public class UserService {
 		return persistence.getAllUsers();
 	}
 	
+	public User updatePhotoUrl(String username, String photoUrl) {
+		return persistence.updatePhotoUrl(username, photoUrl);
+	}
+
 	public void deleteUser(Long id) {
 		persistence.deleteUser(id);
 	}

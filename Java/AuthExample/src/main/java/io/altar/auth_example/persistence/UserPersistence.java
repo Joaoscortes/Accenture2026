@@ -44,6 +44,14 @@ public class UserPersistence {
 		return query.getResultList();
 	}
 	
+	public User updatePhotoUrl(String username, String photoUrl) {
+		User user = findByUsername(username);
+		if (user != null) {
+			user.setPhotoUrl(photoUrl);
+		}
+		return user;
+	}
+
 	public void deleteUser(Long id) {
 		User user = em.find(User.class, id);
 		if (user != null) {

@@ -2,6 +2,9 @@
   <section class="card">
     <h1>User Profile</h1>
     @if (user(); as currentUser) {
+      @if (currentUser.photoUrl) {
+        <img [src]="currentUser.photoUrl" [alt]="currentUser.username + ' photo'" class="user-photo">
+      }
       <dl class="profile">
         <div class="profile-field">
           <dt>Username</dt>
@@ -26,6 +29,15 @@
           </div>
         }
       </dl>
+      
+      <div class="photo-upload">
+        <h2>Update Profile Photo</h2>
+        <input type="file" (change)="onFileSelected($event)" accept="image/*">
+        <button (click)="uploadPhoto()" [disabled]="!selectedFile">Upload Photo</button>
+        @if (uploading()) {
+          <p>Uploading...</p>
+        }
+      </div>
     } @else {
       <p>Your profile is not available.</p>
     }

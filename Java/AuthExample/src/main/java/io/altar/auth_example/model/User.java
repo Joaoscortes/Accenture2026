@@ -1,5 +1,6 @@
 package io.altar.auth_example.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -17,8 +18,16 @@ public class User extends Entity_ {
 	private int age;
 	@Enumerated(EnumType.STRING)
 	private Role role;
+	@Column(length = 2048)
+	private String photoUrl;
 
-	
+	public String getPhotoUrl() {
+		return photoUrl;
+	}
+
+	public void setPhotoUrl(String photoUrl) {
+		this.photoUrl = photoUrl;
+	}
 
 	public String getUsername() {
 		return username;

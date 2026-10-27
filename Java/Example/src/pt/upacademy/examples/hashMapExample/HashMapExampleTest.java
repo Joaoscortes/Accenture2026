@@ -7,9 +7,11 @@ public class HashMapExampleTest {
 		
 //		HashMapExample<User> users = new HashMapExample<User>();
 		RepoUser users = RepoUser.getInstance();
+		System.out.println(users);
 		
 //		HashMapExample<Product> products = new HashMapExample<Product>();
 		RepoProduct products = RepoProduct.getInstance();
+		System.out.println(products);
 
 
 		// HashMapExample<Atum> atuns = new HashMapExample<Atum>();

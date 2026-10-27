@@ -3,6 +3,7 @@ export interface User {
   email?: string;
   age?: number;
   role?: string;
+  photoUrl?: string;
 }
 
 export interface RegisterRequest {

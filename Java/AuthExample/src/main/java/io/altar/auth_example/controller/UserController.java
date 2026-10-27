@@ -7,6 +7,7 @@ import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -17,11 +18,13 @@ import javax.ws.rs.core.Response;
 import io.altar.auth_example.dto.LoginRequest;
 import io.altar.auth_example.dto.LoginResponse;
 import io.altar.auth_example.dto.RecoverPasswordRequest;
+import io.altar.auth_example.dto.UpdatePhotoRequest;
 import io.altar.auth_example.dto.UserResponse;
 import io.altar.auth_example.model.User;
 import io.altar.auth_example.service.UserService;
 import io.altar.auth_example.util.JwtUtil;
 import io.altar.auth_example.util.PasswordUtil;
+import io.altar.auth_example.util.PhotoUrlValidator;
 import io.altar.auth_example.util.SendGridService;
 import io.jsonwebtoken.JwtException;
 
@@ -98,6 +101,42 @@ public class UserController {
 		}
 
 		User user = service.findByUsername(username);
+		if (user == null) {
+			return Response.status(Response.Status.NOT_FOUND).entity("User not found").build();
+		}
+		return Response.ok(new UserResponse(user)).build();
+	}
+
+	@PUT
+	@Path("/me/photo")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response updatePhoto(@HeaderParam(HttpHeaders.AUTHORIZATION) String authorization,
+			UpdatePhotoRequest request) {
+		if (authorization == null || !authorization.startsWith("Bearer ")) {
+			return Response.status(Response.Status.UNAUTHORIZED)
+					.entity("Missing or invalid authorization header").build();
+		}
+
+		String username;
+		try {
+			username = JwtUtil.getUsernameFromToken(authorization.substring("Bearer ".length()).trim());
+		} catch (JwtException | IllegalArgumentException e) {
+			return Response.status(Response.Status.UNAUTHORIZED).entity("Invalid or expired token").build();
+		}
+
+		String photoUrl = request == null ? null : request.getPhotoUrl();
+		if (!PhotoUrlValidator.isValid(photoUrl)) {
+			return Response.status(Response.Status.BAD_REQUEST)
+					.entity("photoUrl must be an absolute http(s) URL up to "
+							+ PhotoUrlValidator.MAX_LENGTH + " characters")
+					.build();
+		}
+		if (photoUrl != null && photoUrl.trim().isEmpty()) {
+			photoUrl = null;
+		}
+
+		User user = service.updatePhotoUrl(username, photoUrl);
 		if (user == null) {
 			return Response.status(Response.Status.NOT_FOUND).entity("User not found").build();
 		}

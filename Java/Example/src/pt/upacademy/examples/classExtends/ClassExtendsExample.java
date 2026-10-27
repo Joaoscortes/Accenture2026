@@ -3,7 +3,7 @@ package pt.upacademy.examples.classExtends;
 public class ClassExtendsExample {
 
 	public static void main(String[] args) {
-		ClassA a = new ClassB();
+//		ClassA a = new ClassB();
 //		ClassA a1 = new ClassA();
 //		ClassA a2 = new ClassC();
 		// ClassC c = new ClassA();
