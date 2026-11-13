@@ -2,6 +2,7 @@ package io.altar.auth_example.persistence;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
@@ -18,44 +19,53 @@ public class UserPersistence {
 	}
 	
 	public User findByUsername(String username) {
-		TypedQuery<User> query = em.createQuery("SELECT u FROM User u WHERE u.username = :username", User.class);
+		TypedQuery<User> query = em.createQuery("SELECT u FROM User u WHERE u.username = :username AND u.deleted = false", User.class);
 		query.setParameter("username", username);
 		
 		try {
 			return query.getSingleResult();
-		} catch (Exception e) {
+		} catch (NoResultException e) {
 			return null;
 		}
 	}
 	
 	public User findByEmail(String email) {
-		TypedQuery<User> query = em.createQuery("SELECT u FROM User u WHERE u.email = :email", User.class);
+		TypedQuery<User> query = em.createQuery("SELECT u FROM User u WHERE u.email = :email AND u.deleted = false", User.class);
 		query.setParameter("email", email);
 		
 		try {
 			return query.getSingleResult();
-		} catch (Exception e) {
+		} catch (NoResultException e) {
 			return null;
 		}
 	}
 	
 	public Iterable<User> getAllUsers() {
-		TypedQuery<User> query = em.createQuery("SELECT u FROM User u", User.class);
+		TypedQuery<User> query = em.createQuery("SELECT u FROM User u WHERE u.deleted = false", User.class);
 		return query.getResultList();
 	}
 	
-	public User updatePhotoUrl(String username, String photoUrl) {
-		User user = findByUsername(username);
+	public User updatePhotoUrl(Long id, String photoUrl) {
+		User user = findActiveById(id);
 		if (user != null) {
 			user.setPhotoUrl(photoUrl);
 		}
 		return user;
 	}
 
-	public void deleteUser(Long id) {
+	public User findActiveById(Long id) {
 		User user = em.find(User.class, id);
-		if (user != null) {
-			em.remove(user);
+		return user != null && !user.isDeleted() ? user : null;
+	}
+
+	public boolean softDeleteUser(Long id) {
+		User user = findActiveById(id);
+		if (user == null) {
+			return false;
 		}
+		user.setDeleted(true);
+		user.setUsername(null);
+		user.setEmail(null);
+		return true;
 	}
 }

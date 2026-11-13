@@ -21,6 +21,7 @@ import io.altar.auth_example.dto.RecoverPasswordRequest;
 import io.altar.auth_example.dto.UpdatePhotoRequest;
 import io.altar.auth_example.dto.UserResponse;
 import io.altar.auth_example.model.User;
+import io.altar.auth_example.model.Role;
 import io.altar.auth_example.service.UserService;
 import io.altar.auth_example.util.JwtUtil;
 import io.altar.auth_example.util.PasswordUtil;
@@ -52,7 +53,7 @@ public class UserController {
 		
 		if (user != null && PasswordUtil.verifyPassword(loginRequest.getPassword(), user.getPassword())) {
 			// Generate JWT token with role
-			String token = JwtUtil.generateToken(user.getUsername(), user.getRole().name());
+			String token = JwtUtil.generateToken(user.getUsername(), user.getRole().name(), user.getId());
 			return Response.ok(new LoginResponse(token)).build();
 		}
 		
@@ -92,15 +93,15 @@ public class UserController {
 					.entity("Missing or invalid authorization header").build();
 		}
 
-		String username;
+		Long userId;
 		try {
 			// Parsing verifies the signature and rejects expired tokens
-			username = JwtUtil.getUsernameFromToken(authorization.substring("Bearer ".length()).trim());
+			userId = JwtUtil.getUserIdFromToken(authorization.substring("Bearer ".length()).trim());
 		} catch (JwtException | IllegalArgumentException e) {
 			return Response.status(Response.Status.UNAUTHORIZED).entity("Invalid or expired token").build();
 		}
 
-		User user = service.findByUsername(username);
+		User user = userId == null ? null : service.findActiveById(userId);
 		if (user == null) {
 			return Response.status(Response.Status.NOT_FOUND).entity("User not found").build();
 		}
@@ -118,9 +119,9 @@ public class UserController {
 					.entity("Missing or invalid authorization header").build();
 		}
 
-		String username;
+		Long userId;
 		try {
-			username = JwtUtil.getUsernameFromToken(authorization.substring("Bearer ".length()).trim());
+			userId = JwtUtil.getUserIdFromToken(authorization.substring("Bearer ".length()).trim());
 		} catch (JwtException | IllegalArgumentException e) {
 			return Response.status(Response.Status.UNAUTHORIZED).entity("Invalid or expired token").build();
 		}
@@ -136,7 +137,7 @@ public class UserController {
 			photoUrl = null;
 		}
 
-		User user = service.updatePhotoUrl(username, photoUrl);
+		User user = userId == null ? null : service.updatePhotoUrl(userId, photoUrl);
 		if (user == null) {
 			return Response.status(Response.Status.NOT_FOUND).entity("User not found").build();
 		}
@@ -153,13 +154,17 @@ public class UserController {
 	
 	@DELETE
 	@Path("/{id}")
-	public Response deleteUser(@PathParam("id") Long id) {
-		try {
-			service.deleteUser(id);
-			return Response.noContent().build();
-		} catch (Exception e) {
-			return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
-					.entity("Failed to delete user").build();
+	public Response deleteUser(@PathParam("id") Long id,
+			@HeaderParam(HttpHeaders.AUTHORIZATION) String authorization) {
+		Long requesterId = JwtUtil.getUserIdFromToken(authorization.substring("Bearer ".length()).trim());
+		User requester = service.findActiveById(requesterId);
+		if (requester == null) {
+			return Response.status(Response.Status.UNAUTHORIZED).build();
 		}
+		if (!requesterId.equals(id) && requester.getRole() != Role.ADMIN) {
+			return Response.status(Response.Status.FORBIDDEN).build();
+		}
+		return service.softDeleteUser(id) ? Response.noContent().build()
+				: Response.status(Response.Status.NOT_FOUND).entity("User not found").build();
 	}
 }

@@ -12,16 +12,17 @@ public class JwtUtilTest {
 
     @Test
     void tokenRoundTripReturnsOwner() {
-        String token = JwtUtil.generateToken("alice", "ADMIN");
+        String token = JwtUtil.generateToken("alice", "ADMIN", 42);
 
         assertEquals("alice", JwtUtil.getUsernameFromToken(token));
         assertEquals("ADMIN", JwtUtil.getRoleFromToken(token));
+        assertEquals(42L, JwtUtil.getUserIdFromToken(token));
         assertFalse(JwtUtil.isTokenExpired(token));
     }
 
     @Test
     void tamperedTokenIsRejected() {
-        String token = JwtUtil.generateToken("alice", "USER");
+        String token = JwtUtil.generateToken("alice", "USER", 42);
         String tampered = token.substring(0, token.length() - 2) + "xx";
 
         assertThrows(JwtException.class, () -> JwtUtil.getUsernameFromToken(tampered));

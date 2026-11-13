@@ -1,10 +1,9 @@
 package io.altar.auth_example.filter;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.annotation.Priority;
+import javax.inject.Inject;
 import javax.ws.rs.Priorities;
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ContainerRequestFilter;
@@ -12,77 +11,55 @@ import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.Provider;
 
+import io.altar.auth_example.model.Role;
+import io.altar.auth_example.model.User;
+import io.altar.auth_example.service.UserService;
 import io.altar.auth_example.util.JwtUtil;
+import io.jsonwebtoken.JwtException;
 
 @Provider
 @Priority(Priorities.AUTHENTICATION)
 public class AuthenticationFilter implements ContainerRequestFilter {
-    
-    private static final List<String> EXCLUDED_PATHS = new ArrayList<>();
-    private static final List<String> ADMIN_ONLY_PATHS = new ArrayList<>();
-    
-    static {
-        // Add paths that don't require authentication (like login and recovery)
-    	EXCLUDED_PATHS.add("/users");
-        EXCLUDED_PATHS.add("/users/login");
-        EXCLUDED_PATHS.add("/users/recover-password");
-        
-        // Add paths that require admin role
-        ADMIN_ONLY_PATHS.add("/users/query");
-    }
-    
+
+    @Inject
+    protected UserService users;
+
     @Override
     public void filter(ContainerRequestContext requestContext) throws IOException {
-        String requestPath = requestContext.getUriInfo().getPath();
-        
-        // Skip authentication for excluded paths
-        if (EXCLUDED_PATHS.stream().anyMatch(path -> requestPath.contains(path))) {
+        String path = requestContext.getUriInfo().getPath().replaceAll(";[^/]*", "")
+                .replaceAll("^/+", "").replaceAll("/+$", "");
+        if ("POST".equals(requestContext.getMethod()) && ("users".equals(path)
+                || "users/login".equals(path) || "users/recover-password".equals(path))) {
             return;
         }
-        
-        // Get the Authorization header
-        String authorizationHeader = requestContext.getHeaderString(HttpHeaders.AUTHORIZATION);
-        
-        if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer ")) {
-            requestContext.abortWith(
-                Response.status(Response.Status.UNAUTHORIZED)
-                    .entity("Missing or invalid authorization header")
-                    .build()
-            );
+
+        String authorization = requestContext.getHeaderString(HttpHeaders.AUTHORIZATION);
+        if (authorization == null || !authorization.startsWith("Bearer ")) {
+            requestContext.abortWith(Response.status(Response.Status.UNAUTHORIZED)
+                    .entity("Missing or invalid authorization header").build());
             return;
         }
-        
-        // Extract the token
-        String token = authorizationHeader.substring("Bearer ".length());
-        
+
+        String token = authorization.substring("Bearer ".length()).trim();
+        Long userId;
+        String username;
         try {
-            // Validate the token
-            if (!JwtUtil.validateToken(token, JwtUtil.getUsernameFromToken(token))) {
-                requestContext.abortWith(
-                    Response.status(Response.Status.UNAUTHORIZED)
-                        .entity("Invalid or expired token")
-                        .build()
-                );
-                return;
-            }
-            
-            // Check if endpoint requires admin role
-            if (ADMIN_ONLY_PATHS.stream().anyMatch(path -> requestPath.contains(path))) {
-                String userRole = JwtUtil.getRoleFromToken(token);
-                if (!"ADMIN".equals(userRole)) {
-                    requestContext.abortWith(
-                        Response.status(Response.Status.FORBIDDEN)
-                            .entity("Admin role required for this operation")
-                            .build()
-                    );
-                }
-            }
-        } catch (Exception e) {
-            requestContext.abortWith(
-                Response.status(Response.Status.UNAUTHORIZED)
-                    .entity("Invalid token: " + e.getMessage())
-                    .build()
-            );
+            userId = JwtUtil.getUserIdFromToken(token);
+            username = JwtUtil.getUsernameFromToken(token);
+        } catch (JwtException | IllegalArgumentException e) {
+            requestContext.abortWith(Response.status(Response.Status.UNAUTHORIZED)
+                    .entity("Invalid or expired token").build());
+            return;
+        }
+        User user = userId == null ? null : users.findActiveById(userId);
+        if (user == null || username == null || !username.equals(user.getUsername())) {
+            requestContext.abortWith(Response.status(Response.Status.UNAUTHORIZED)
+                    .entity("Invalid or expired token").build());
+            return;
+        }
+        if ("users/query".equals(path) && user.getRole() != Role.ADMIN) {
+            requestContext.abortWith(Response.status(Response.Status.FORBIDDEN)
+                    .entity("Admin role required for this operation").build());
         }
     }
 }

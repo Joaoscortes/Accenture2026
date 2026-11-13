@@ -21,10 +21,16 @@ public class JwtUtil {
     private static final String SECRET_KEY = "auth_example_secret_key_for_jwt_token_generation";
     private static final long JWT_EXPIRATION_MS = 86400000; // 24 hours
     
-    public static String generateToken(String username, String role) {
+    public static String generateToken(String username, String role, long userId) {
         Map<String, Object> claims = new HashMap<>();
         claims.put("role", role);
+        claims.put("userId", userId);
         return createToken(claims, username);
+    }
+
+    public static Long getUserIdFromToken(String token) {
+        Number id = getClaimFromToken(token, claims -> claims.get("userId", Number.class));
+        return id == null ? null : id.longValue();
     }
     
     private static String createToken(Map<String, Object> claims, String subject) {

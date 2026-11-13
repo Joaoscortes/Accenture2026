@@ -5,6 +5,7 @@ import javax.inject.Inject;
 import javax.transaction.Transactional;
 
 import io.altar.auth_example.model.User;
+import io.altar.auth_example.model.Role;
 import io.altar.auth_example.persistence.UserPersistence;
 
 @ApplicationScoped
@@ -15,6 +16,9 @@ public class UserService {
 	protected UserPersistence persistence;
 
 	public User create(User e) {
+		e.setId(0);
+		e.setDeleted(false);
+		e.setRole(Role.USER);
 		return persistence.create(e);
 	}
 	
@@ -30,11 +34,15 @@ public class UserService {
 		return persistence.getAllUsers();
 	}
 	
-	public User updatePhotoUrl(String username, String photoUrl) {
-		return persistence.updatePhotoUrl(username, photoUrl);
+	public User updatePhotoUrl(Long id, String photoUrl) {
+		return persistence.updatePhotoUrl(id, photoUrl);
 	}
 
-	public void deleteUser(Long id) {
-		persistence.deleteUser(id);
+	public User findActiveById(Long id) {
+		return persistence.findActiveById(id);
+	}
+
+	public boolean softDeleteUser(Long id) {
+		return persistence.softDeleteUser(id);
 	}
 }

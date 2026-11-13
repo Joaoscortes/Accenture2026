@@ -20,6 +20,8 @@ public class User extends Entity_ {
 	private Role role;
 	@Column(length = 2048)
 	private String photoUrl;
+	@Column(nullable = false)
+	private boolean deleted = false;
 
 	public String getPhotoUrl() {
 		return photoUrl;
@@ -68,5 +70,13 @@ public class User extends Entity_ {
 	
 	public void setRole(Role role) {
 		this.role = role;
+	}
+
+	public boolean isDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
 	}
 }
